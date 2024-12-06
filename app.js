@@ -1,12 +1,13 @@
 const express = require('express');
 const session = require('express-session');
 const bcrypt = require('bcrypt');
-const conn = require('./db');
+const { conn, fetchData } = require('./db'); // Correctly import fetchData
 const app = express();
 const multer = require('multer');
 const path = require('path');
 
 app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'views')); // Ensure the views directory is correctly set
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
@@ -35,12 +36,13 @@ app.get('/', (req, res) => {
     if (!req.session.user) {
         return res.redirect('/landing');
     }
-    conn.query('SELECT id, task, completed FROM tasks WHERE user_id = ?', [req.session.user.id], (err, results) => {
+    fetchData(req.session.user.id, (err, tasks) => {
         if (err) {
-            console.error('Database query failed', err);
-            return res.status(500).send('Database query failed');
+            console.error('Error fetching data from database', err);
+            res.status(500).send('Error fetching data from database');
+        } else {
+            res.render('index', { tasks });
         }
-        res.render('index', { tasks: results, user: req.session.user });
     });
 });
 
@@ -96,6 +98,9 @@ app.get('/profile', (req, res) => {
 app.post('/update-profile-picture', upload.single('profile-picture'), (req, res) => {
     if (!req.session.user) {
         return res.status(401).render('error', { message: 'Unauthorized' });
+    }
+    if (!req.file) {
+        return res.status(400).render('error', { message: 'No file uploaded' });
     }
     const profilePicture = `/uploads/${req.file.filename}`;
     conn.query('UPDATE users SET profile_picture = ? WHERE id = ?', [profilePicture, req.session.user.id], (err, results) => {
@@ -279,5 +284,5 @@ app.post('/edit/:id', (req, res) => {
 });
 
 app.listen(3000, () => {
-    console.log('Server is running on port 3000');
+    console.log('Server is running on http://localhost:3000');
 });
