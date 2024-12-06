@@ -1,0 +1,21 @@
+doctype html
+html
+  head
+    title Login
+    link(rel="stylesheet" href="/styles.css")
+  body
+    .navbar
+      a(href="/") Home
+      a(href="/register") Register
+    .center-content
+      .container
+        h1 Login
+        form(action="/login" method="post")
+          label(for="username") Username:
+          input(type="text" name="username" id="username" required)
+          label(for="password") Password:
+          input(type="password" name="password" id="password" required)
+          button(type="submit") Login
+        .links
+          a(href="/register") Don't have an account? Register
+          a(href="/forgot-password") Forgot Password?

@@ -1,0 +1,21 @@
+doctype html
+html
+  head
+    title Register
+    link(rel="stylesheet" href="/styles.css")
+  body
+    .navbar
+      a(href="/") Home
+      a(href="/login") Login
+    .container
+      h1 Register
+      form(action="/register" method="post")
+        label(for="username") Username:
+        input(type="text" name="username" required)
+        label(for="email") Email:
+        input(type="email" name="email" required)
+        label(for="password") Password:
+        input(type="password" name="password" required)
+        button(type="submit") Register
+      .links
+        a(href="/login") Already have an account? Sign in

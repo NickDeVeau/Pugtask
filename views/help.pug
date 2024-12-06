@@ -1,0 +1,22 @@
+extends layout.pug
+
+block content
+  h1 Help
+  p Here you can find help and FAQs.
+  h2 Frequently Asked Questions
+  ul
+    li
+      h3 How do I add a task?
+      p To add a task, log in and use the form on the home page.
+    li
+      h3 How do I delete a task?
+      p To delete a task, log in and use the delete button next to the task.
+  h2 Contact Us
+  form(action="/send-message" method="post")
+    label(for="name") Name:
+    input(type="text" name="name" required)
+    label(for="email") Email:
+    input(type="email" name="email" required)
+    label(for="message") Message:
+    textarea(name="message" required)
+    button(type="submit") Send Message

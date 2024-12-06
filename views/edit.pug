@@ -1,0 +1,9 @@
+
+extends layout.pug
+
+block content
+  h1 Edit Task
+  form(action=`/edit/${task.id}` method="post")
+    label(for="task") Task:
+    input(type="text" name="task" value=task.task required)
+    button(type="submit") Update Task

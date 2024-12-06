@@ -1,0 +1,20 @@
+.navbar
+  a.nav-item.nav-button(href="/") Home
+  a.nav-item.nav-button(href="/about") About
+  a.nav-item.nav-button(href="/help") Help
+  a.nav-item.nav-button(href="/faq") FAQ
+  a.nav-item.nav-button(href="/contact") Contact
+  a.nav-item.nav-button(href="/terms") Terms
+  a.nav-item.nav-button(href="/privacy") Privacy
+  if user
+    a.nav-item.nav-button(href="/profile") Profile
+    a.nav-item.nav-button(href="/settings") Settings
+    a.nav-item.nav-button(href="/logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();") Logout
+    form#logout-form(action="/logout" method="post" style="display:none;")
+    .user-info.user-info-margin
+      if user.profile_picture
+        img(src=user.profile_picture alt="Profile Picture" class="profile-picture")
+      span.username= user.username
+  else
+    a.nav-item.nav-button(href="/login") Login
+    a.nav-item.nav-button(href="/register") Register

@@ -1,0 +1,17 @@
+
+doctype html
+html
+  head
+    title MySQL Data
+  body
+    h1 Data from MySQL Database
+    table
+      thead
+        tr
+          th ID
+          th Name
+      tbody
+        each row in data
+          tr
+            td= row.id
+            td= row.name

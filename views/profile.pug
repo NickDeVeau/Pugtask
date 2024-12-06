@@ -1,0 +1,14 @@
+extends layout.pug
+
+block content
+  h1 Profile
+  p Username: #{user.username}
+  p Email: #{user.email}
+  if user.profile_picture
+    .profile-picture-container
+      img(src=user.profile_picture alt="Profile Picture" style="width:100px; height:100px; border-radius:50%;")
+  form(action="/update-profile-picture" method="post" enctype="multipart/form-data")
+    .update-profile-picture-container
+      label(for="profile-picture") Update Profile Picture:
+    input(type="file" name="profile-picture" accept="image/*")
+    button(type="submit") Update

@@ -1,0 +1,41 @@
+extends layout.pug
+
+block content
+  h1 Task Management
+  if user
+    p Welcome, #{user.username}
+    form(action="/add" method="post")
+      label(for="task") Task:
+      input(type="text" name="task" required)
+      button(type="submit") Add Task
+    form(action="/search" method="get")
+      label(for="search") Search Tasks:
+      input(type="text" name="search" placeholder="Search tasks...")
+      button(type="submit") Search
+  else
+    p Please log in to manage your tasks.
+    .links
+      a(href="/login") Login
+      a(href="/register") Register
+  table
+    thead
+      tr
+        th ID
+        th Task
+        th Status
+        th Actions
+    tbody
+      each row in tasks
+        tr
+          td= row.id
+          td= row.task
+          td= row.completed ? 'Completed' : 'Pending'
+          td
+            if user && !row.completed
+              form(action=`/complete/${row.id}` method="post" style="display:inline")
+                button(type="submit" class="text-button") Complete
+            if user
+              form(action=`/delete/${row.id}` method="post" style="display:inline")
+                button(type="submit" class="text-button") Delete
+              form(action=`/edit/${row.id}` method="get" style="display:inline")
+                button(type="submit" class="text-button") Edit

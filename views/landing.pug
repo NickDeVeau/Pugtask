@@ -1,0 +1,18 @@
+doctype html
+html
+  head
+    title Welcome
+    link(rel="stylesheet" href="/styles.css")
+  body
+    .navbar
+      a.nav-item(href="/") Home
+      a.nav-item(href="/login") Login
+      a.nav-item(href="/register") Register
+    .landing-container.center-content
+      .hero
+        .hero-content
+          h1 Welcome to Task Management
+          p Manage your tasks efficiently and effectively.
+          p Sign up now to start managing your tasks!
+          img.hero-image(src="/uploads/image.png" alt="Landing Image" style="max-width:100%; height:auto;")
+          a.button.button-primary(href="/register" style="display:block; margin-top:20px;") Get Started
