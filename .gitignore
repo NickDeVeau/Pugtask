@@ -1,0 +1,20 @@
+
+# Ignore everything in the uploads folder
+/uploads/*
+
+# Except for image.png
+!/uploads/image.png
+
+# Node modules
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Environment variables
+.env
+
+# Other files
+.DS_Store
